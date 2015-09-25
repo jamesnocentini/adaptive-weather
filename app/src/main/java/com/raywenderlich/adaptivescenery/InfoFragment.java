@@ -13,7 +13,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /*
@@ -39,52 +38,50 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class InfoFragment extends Fragment {
 
-    SupportMapFragment mapFragment;
+  SupportMapFragment mapFragment;
 
-    public InfoFragment() {
+  public InfoFragment() {
+  }
+
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_info, container, false);
+  }
+
+  @Override
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    setUpMapIfNeeded();
+  }
+
+  private void setUpMapIfNeeded() {
+    // Do a null check to confirm that we have not already instantiated the map.
+    if (mapFragment == null) {
+      mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
+      // Check if we were successful in obtaining the map.
+      if (mapFragment != null) {
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+          @Override
+          public void onMapReady(GoogleMap map) {
+            loadMap(map);
+          }
+        });
+      }
     }
+  }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_info, container, false);
-        return rootView;
+  // The Map is verified. It is now safe to manipulate the map.
+  private void loadMap(GoogleMap googleMap) {
+    if (googleMap != null) {
+      // Use green marker icon
+      BitmapDescriptor defaultMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
+      // listingPosition is a LatLng point
+      LatLng sceneryPosition = new LatLng(44.22438242, 6.944561);
+      // Create the marker on the fragment
+      mapFragment.getMap().addMarker(new MarkerOptions()
+          .position(sceneryPosition)
+          .icon(defaultMarker));
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        setUpMapIfNeeded();
-    }
-
-    protected void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
-        if (mapFragment == null) {
-            mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
-            // Check if we were successful in obtaining the map.
-            if (mapFragment != null) {
-                mapFragment.getMapAsync(new OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(GoogleMap map) {
-                        loadMap(map);
-                    }
-                });
-            }
-        }
-    }
-
-    // The Map is verified. It is now safe to manipulate the map.
-    protected void loadMap(GoogleMap googleMap) {
-        if (googleMap != null) {
-            // Use green marker icon
-            BitmapDescriptor defaultMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
-            // listingPosition is a LatLng point
-            LatLng sceneryPosition = new LatLng(44.22438242, 6.944561);
-            // Create the marker on the fragment
-            Marker mapMarker = mapFragment.getMap().addMarker(new MarkerOptions()
-                    .position(sceneryPosition)
-                    .icon(defaultMarker));
-        }
-    }
-
+  }
 }
