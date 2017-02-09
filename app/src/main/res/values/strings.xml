@@ -3,4 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title">French Alps from a sidewalk</string>
+    <string name="subhead">Taken on 02/09/17</string>
 </resources>

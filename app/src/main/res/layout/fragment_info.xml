@@ -19,14 +19,14 @@
         android:id="@+id/textTitleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="French Alps from a sidewalk"
+        android:text="@string/title"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <TextView
         android:id="@+id/textDateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Taken on 02/09/17"
+        android:text="@string/subhead"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
   </LinearLayout>
 
