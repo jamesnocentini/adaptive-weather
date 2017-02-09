@@ -5,7 +5,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 
 /*
- * Copyright (c) 2015 Razeware LLC
+ * Copyright (c) 2017 Razeware LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

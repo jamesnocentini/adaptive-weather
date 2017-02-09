@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
 /*
- * Copyright (c) 2015 Razeware LLC
+ * Copyright (c) 2017 Razeware LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
