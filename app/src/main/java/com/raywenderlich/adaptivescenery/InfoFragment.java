@@ -79,7 +79,7 @@ public class InfoFragment extends Fragment {
       // listingPosition is a LatLng point
       LatLng sceneryPosition = new LatLng(44.22438242, 6.944561);
       // Create the marker on the fragment
-      mapFragment.getMap().addMarker(new MarkerOptions()
+      googleMap.addMarker(new MarkerOptions()
           .position(sceneryPosition)
           .icon(defaultMarker));
     }
