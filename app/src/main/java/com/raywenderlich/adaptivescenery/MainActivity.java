@@ -1,9 +1,11 @@
 package com.raywenderlich.adaptivescenery;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 /*
  * Copyright (c) 2017 Razeware LLC
@@ -26,23 +28,40 @@ import android.support.v4.view.ViewPager;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
+
+  private RecyclerView mRecyclerView;
+  private Locations mLocations;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    mRecyclerView = (RecyclerView) findViewById(R.id.list);
+    mRecyclerView.setHasFixedSize(true);
+    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
+    mRecyclerView.addItemDecoration(dividerItemDecoration);
+    mRecyclerView.setLayoutManager(layoutManager);
 
-    ScreenUtility utility = new ScreenUtility(this);
-
-    if (utility.getWidth() < 400.0) {
-      // Get the ViewPager and set it's PagerAdapter so that it can display items
-      ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-      viewPager.setAdapter(new SceneryFragmentPagerAdapter(getSupportFragmentManager()));
-
-      // Give the TabLayout the ViewPager
-      TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-      tabLayout.setupWithViewPager(viewPager);
+    if (savedInstanceState != null) {
+      mLocations = savedInstanceState.getParcelable("locations");
+    } else {
+      mLocations = new Locations();
     }
+
+    LocationAdapter mLocationAdapter = new LocationAdapter(mLocations, new LocationAdapter.OnItemClickListener() {
+      @Override
+      public void onItemClick(String location) {
+      }
+    });
+    mRecyclerView.setAdapter(mLocationAdapter);
   }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putParcelable("locations", mLocations);
+  }
+  
 }

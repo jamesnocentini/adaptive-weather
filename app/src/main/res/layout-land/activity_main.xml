@@ -5,20 +5,19 @@
               android:layout_height="match_parent"
               android:orientation="horizontal">
 
-  <fragment
-      android:id="@+id/imageFragment"
-      android:name="com.raywenderlich.adaptivescenery.ImageFragment"
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      tools:layout="@layout/fragment_image"/>
+  <LinearLayout android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-  <fragment
-      android:id="@+id/infoFragment"
-      android:name="com.raywenderlich.adaptivescenery.InfoFragment"
+    <include layout="@layout/weather_grid"/>
+
+  </LinearLayout>
+
+  <android.support.v7.widget.RecyclerView
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:layout_weight="1"
-      tools:layout="@layout/fragment_info"/>
+      android:id="@+id/list"
+      tools:listitem="@layout/list_item"/>
 
 </LinearLayout>

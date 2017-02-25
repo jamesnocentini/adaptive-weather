@@ -30,14 +30,4 @@
         android:textAppearance="?android:attr/textAppearanceMedium"/>
   </LinearLayout>
 
-  <fragment android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:map="http://schemas.android.com/apk/res-auto"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            map:cameraTargetLat="44.22438242"
-            map:cameraTargetLng="6.944561"
-            map:cameraZoom="10"/>
-
 </LinearLayout>
