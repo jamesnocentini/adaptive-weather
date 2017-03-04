@@ -1,4 +1,4 @@
-package com.raywenderlich.adaptivescenery;
+package com.raywenderlich.adaptiveweather;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;

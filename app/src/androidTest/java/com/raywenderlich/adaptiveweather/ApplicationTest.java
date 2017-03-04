@@ -1,4 +1,4 @@
-package com.raywenderlich.adaptivescenery;
+package com.raywenderlich.adaptiveweather;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,4 +1,4 @@
-package com.raywenderlich.adaptivescenery;
+package com.raywenderlich.adaptiveweather;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;

@@ -1,4 +1,4 @@
-package com.raywenderlich.adaptivescenery;
+package com.raywenderlich.adaptiveweather;
 
 import java.util.List;
 
