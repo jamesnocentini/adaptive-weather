@@ -1,0 +1,30 @@
+[
+  {
+    "name": "London",
+    "forecast": ["sun", "sun", "sun", "sun", "sun", "sun"]
+  },
+  {
+    "name": "San Francisco",
+    "forecast": ["cloud", "rain", "cloud", "thunder", "snow", "fog"]
+  },
+  {
+    "name": "Beijing",
+    "forecast": ["sun", "fog", "cloud", "sun", "sun", "sun"]
+  },
+  {
+    "name": "Sydney",
+    "forecast": ["sun", "sun", "sun", "thunder", "cloud", "cloud"]
+  },
+  {
+    "name": "Washington",
+    "forecast": ["cloud", "cloud", "cloud", "cloud", "cloud", "cloud"]
+  },
+  {
+    "name": "Rome",
+    "forecast": ["sun", "sun", "sun", "sun", "sun", "sun"]
+  },
+  {
+    "name": "Paris",
+    "forecast": ["sun", "cloud", "sun", "cloud", "sun", "sun"]
+  }
+]

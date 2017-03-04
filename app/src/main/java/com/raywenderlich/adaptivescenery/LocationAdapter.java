@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 /*
  * Copyright (c) 2017 Razeware LLC
  * 
@@ -31,10 +33,11 @@ import android.widget.TextView;
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
 
     public interface OnItemClickListener {
-        void onItemClick(String item);
+        void onItemClick(Location location);
     };
 
-    public Locations mDataset;
+    public List<Location> mDataset;
+    private String selectedLocation;
     public OnItemClickListener mListener;
 
     static public class ViewHolder extends RecyclerView.ViewHolder {
@@ -45,7 +48,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         }
     }
 
-    public LocationAdapter(Locations dataset, OnItemClickListener listener) {
+    public LocationAdapter(List<Location> dataset, OnItemClickListener listener) {
         mDataset = dataset;
         mListener = listener;
     }
@@ -59,16 +62,16 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.title.setText(mDataset.getLocation(position));
+        holder.title.setText(mDataset.get(position).getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onItemClick(mDataset.getLocation(position));
-                mDataset.setSelectedLocation(mDataset.getLocation(position));
+                mListener.onItemClick(mDataset.get(position));
+                selectedLocation = mDataset.get(position).getName();
                 notifyDataSetChanged();
             }
         });
-        if (mDataset.getLocation(position).equals(mDataset.getSelectedLocation())) {
+        if (mDataset.get(position).getName().equals(selectedLocation)) {
             holder.itemView.setSelected(true);
             holder.title.setTextColor(Color.WHITE);
         } else {
@@ -79,6 +82,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mDataset.getLocations().size();
+        return mDataset.size();
+    }
+
+    public String getSelectedLocation() {
+        return selectedLocation;
+    }
+
+    public void setSelectedLocation(String selectedLocation) {
+        this.selectedLocation = selectedLocation;
     }
 }
