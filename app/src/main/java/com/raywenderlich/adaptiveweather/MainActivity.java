@@ -52,16 +52,20 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    // 1.
     RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.list);
     mRecyclerView.setHasFixedSize(true);
 
+    // 2.
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
     DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
     mRecyclerView.addItemDecoration(dividerItemDecoration);
     mRecyclerView.setLayoutManager(layoutManager);
 
+    // 3.
     loadData();
 
+    // 4.
     mLocationAdapter = new LocationAdapter(this, mLocations, new LocationAdapter.OnItemClickListener() {
       @Override
       public void onItemClick(Location location) {
@@ -105,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void loadData() {
+    // 1.
     String json = null;
     try {
       InputStream is = getAssets().open("data.json");
@@ -122,9 +127,11 @@ public class MainActivity extends AppCompatActivity {
     } catch (JSONException e) {
       e.printStackTrace();
     }
+    // 2.
     for (int i = 0; i < array.length(); i++) {
       try {
         JSONObject object = (JSONObject) array.get(i);
+        // 3.
         JSONArray stringArray = (JSONArray) object.get("forecast");
         List<String> forecast = new ArrayList<String>();
         for (int j = 0; j < stringArray.length(); j++) {

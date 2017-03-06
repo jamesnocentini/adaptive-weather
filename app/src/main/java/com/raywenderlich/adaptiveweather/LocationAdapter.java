@@ -34,6 +34,7 @@ import java.util.List;
  */
 class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
 
+    // 1.
     interface OnItemClickListener {
         void onItemClick(Location location);
     };
@@ -43,21 +44,23 @@ class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
     private String selectedLocation;
     private OnItemClickListener mListener;
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
-        ViewHolder(View v) {
-            super(v);
-            title = (TextView) v.findViewById(android.R.id.text1);
-            title.setTextSize(22);
-        }
-    }
-
+    // 2.
     LocationAdapter(Context context, List<Location> dataset, OnItemClickListener listener) {
         mContext = context;
         mDataset = dataset;
         mListener = listener;
     }
 
+    // 3.
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView title;
+        ViewHolder(View v) {
+            super(v);
+            title = (TextView) v.findViewById(android.R.id.text1);
+        }
+    }
+
+    // 4.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -66,9 +69,11 @@ class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    // 5.
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.title.setText(mDataset.get(position).getName());
+        holder.title.setTextSize(22);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
