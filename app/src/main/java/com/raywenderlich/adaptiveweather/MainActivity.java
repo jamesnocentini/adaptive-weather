@@ -44,7 +44,6 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity {
 
-  private RecyclerView mRecyclerView;
   private List<Location> mLocations = new ArrayList<Location>();
   private LocationAdapter mLocationAdapter;
 
@@ -52,17 +51,18 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    mRecyclerView = (RecyclerView) findViewById(R.id.list);
+
+    RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.list);
     mRecyclerView.setHasFixedSize(true);
+
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
     DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
     mRecyclerView.addItemDecoration(dividerItemDecoration);
     mRecyclerView.setLayoutManager(layoutManager);
 
-    Log.d("App", String.format("Dimensions %f", Resources.getSystem().getDisplayMetrics().density));
     loadData();
 
-    mLocationAdapter = new LocationAdapter(mLocations, new LocationAdapter.OnItemClickListener() {
+    mLocationAdapter = new LocationAdapter(this, mLocations, new LocationAdapter.OnItemClickListener() {
       @Override
       public void onItemClick(Location location) {
         FlexboxLayout forecastView = (FlexboxLayout) findViewById(R.id.forecast);
@@ -72,10 +72,11 @@ public class MainActivity extends AppCompatActivity {
         }
       }
     });
-    if (savedInstanceState != null) {
-      mLocationAdapter.setSelectedLocation(savedInstanceState.getString("locations"));
-    }
     mRecyclerView.setAdapter(mLocationAdapter);
+
+    if (savedInstanceState != null) {
+      mLocationAdapter.setSelectedLocation(savedInstanceState.getString("selectedLocation"));
+    }
   }
 
   private Drawable mapWeatherToDrawable(String weather) {
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    outState.putString("locations", mLocationAdapter.getSelectedLocation());
+    outState.putString("selectedLocation", mLocationAdapter.getSelectedLocation());
   }
 
 }

@@ -1,5 +1,7 @@
 package com.raywenderlich.adaptiveweather;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,25 +32,28 @@ import java.util.List;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
+class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
 
-    public interface OnItemClickListener {
+    interface OnItemClickListener {
         void onItemClick(Location location);
     };
 
-    public List<Location> mDataset;
+    private List<Location> mDataset;
+    private Context mContext;
     private String selectedLocation;
-    public OnItemClickListener mListener;
+    private OnItemClickListener mListener;
 
-    static public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
-        public ViewHolder(View v) {
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView title;
+        ViewHolder(View v) {
             super(v);
-            title = (TextView) v.findViewById(R.id.text1);
+            title = (TextView) v.findViewById(android.R.id.text1);
+            title.setTextSize(22);
         }
     }
 
-    public LocationAdapter(List<Location> dataset, OnItemClickListener listener) {
+    LocationAdapter(Context context, List<Location> dataset, OnItemClickListener listener) {
+        mContext = context;
         mDataset = dataset;
         mListener = listener;
     }
@@ -56,7 +61,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.list_item, parent, false);
+        View view = layoutInflater.inflate(android.R.layout.simple_selectable_list_item, parent, false);
+
         return new ViewHolder(view);
     }
 
@@ -72,10 +78,11 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
             }
         });
         if (mDataset.get(position).getName().equals(selectedLocation)) {
-            holder.itemView.setSelected(true);
+            int backgroundColor = mContext.getResources().getColor(R.color.color_primary_dark);
+            holder.itemView.setBackgroundColor(backgroundColor);
             holder.title.setTextColor(Color.WHITE);
         } else {
-            holder.itemView.setSelected(false);
+            holder.itemView.setBackgroundColor(Color.WHITE);
             holder.title.setTextColor(Color.BLACK);
         }
     }
@@ -85,11 +92,11 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         return mDataset.size();
     }
 
-    public String getSelectedLocation() {
+    String getSelectedLocation() {
         return selectedLocation;
     }
 
-    public void setSelectedLocation(String selectedLocation) {
+    void setSelectedLocation(String selectedLocation) {
         this.selectedLocation = selectedLocation;
     }
 }

@@ -23,12 +23,12 @@ import java.util.List;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-public class Location {
+class Location {
 
     private String name;
     private List<String> forecast;
 
-    public Location(String name, List<String> forecast) {
+    Location(String name, List<String> forecast) {
         this.name = name;
         this.forecast = forecast;
     }
@@ -41,7 +41,7 @@ public class Location {
         this.name = name;
     }
 
-    public List<String> getForecast() {
+    List<String> getForecast() {
         return forecast;
     }
 
