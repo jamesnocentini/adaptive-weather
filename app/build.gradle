@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    compileSdkVersion 25
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "com.raywenderlich.adaptivescenery"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -20,6 +21,6 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:design:22.2.1'
-    compile 'com.google.android.gms:play-services:7.8.0'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile 'com.google.android:flexbox:0.2.5'
 }
